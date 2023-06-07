@@ -4,7 +4,7 @@
     <select
       id="categories"
       name="categories"
-      class="form-control"
+      class="form-select"
       (change)="filterCategory($event)"
     >
       <option value="all" selected>All</option>
@@ -14,7 +14,7 @@
     </select>
   </div>
 
-  <div class="row">
+  <div class="row" *ngIf="!loading">
     <div class="col-md-3 col-sm-12" *ngFor="let item of products">
       <div class="item">
         <img
@@ -34,5 +34,9 @@
         </div>
       </div>
     </div>
+  </div>
+
+  <div class="text-center w-100" *ngIf="loading">
+    <app-spinner></app-spinner>
   </div>
 </div>

@@ -10,6 +10,7 @@ export class AllProductsComponent implements OnInit {
   categories: any[] = [];
   products: any[] = [];
   filteredProducts: any[] = [];
+  loading: boolean = false;
 
   constructor(private service: ProductsService) {}
 
@@ -26,12 +27,16 @@ export class AllProductsComponent implements OnInit {
   }
 
   getProductsByCategory(category: string) {
+    this.loading = true;
+
     this.service.getProductsByCategory(category).subscribe(
       (res: any) => {
         console.log(`Products By ${category}:`, res);
         this.products = res;
+        this.loading = false;
       },
       (error) => {
+        this.loading = false;
         console.log(error);
         alert(`Error => ${error.status} ${error.message}`);
       }
@@ -39,12 +44,17 @@ export class AllProductsComponent implements OnInit {
   }
 
   getProducts() {
+    this.loading = true;
+
     this.service.getAllProducts().subscribe(
       (res: any) => {
         console.log('Products: ', res);
         this.products = res;
+        this.loading = false;
       },
       (error) => {
+        this.loading = false;
+
         console.log(error);
         alert(`Error => ${error.message}`);
       }
@@ -52,12 +62,16 @@ export class AllProductsComponent implements OnInit {
   }
 
   getCategories() {
+    this.loading = true;
     this.service.getAllCategories().subscribe(
       (res: any) => {
         console.log('Categories: ', res);
         this.categories = res;
+        this.loading = false;
       },
       (error) => {
+        this.loading = false;
+
         console.log(error);
         alert(`Error => ${error.status} ${error.message}`);
       }
