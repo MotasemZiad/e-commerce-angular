@@ -1,27 +1,36 @@
 <div class="box mt-5">
   <div class="my-2 w-25">
     <label for="categories" class="my-1">Categories: </label>
-    <select id="categories" name="categories" class="form-control">
-      <option value="1">Option 1</option>
-      <option value="2">Option 2</option>
-      <option value="3">Option 3</option>
-      <option value="4">Option 4</option>
+    <select
+      id="categories"
+      name="categories"
+      class="form-control"
+      (change)="filterCategory($event)"
+    >
+      <option value="all" selected>All</option>
+      <option value="{{ category }}" *ngFor="let category of categories">
+        {{ category | titlecase }}
+      </option>
     </select>
   </div>
 
   <div class="row">
-    <div class="col-md-3 col-sm-12">
+    <div class="col-md-3 col-sm-12" *ngFor="let item of products">
       <div class="item">
-        <img src="assets/test-01.jpg" alt="Product Image" />
+        <img
+          src="{{ item.image }}"
+          loading="lazy"
+          alt="An image of a {{ item.title }}"
+        />
         <div class="body">
-          <h4>Product Title</h4>
-          <p>Test add description</p>
+          <h4>{{ item.title }}</h4>
+          <p>{{ item.description }}</p>
         </div>
         <div
           class="px-3 mb-2 d-flex justify-content-between align-items-center"
         >
           <button class="btn btn-success">Add to cart</button>
-          <span>50 NIS</span>
+          <span>{{ item.price }} NIS</span>
         </div>
       </div>
     </div>
