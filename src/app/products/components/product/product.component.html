@@ -9,7 +9,20 @@
     <p>{{ item.description }}</p>
   </div>
   <div class="px-3 mb-2 d-flex justify-content-between align-items-center">
-    <button class="btn btn-success" (click)="add()">Add to cart</button>
+    <button class="btn btn-success" *ngIf="!addButton" (click)="toggleButton()">
+      Add to cart
+    </button>
+    <div class="d-flex w-50" *ngIf="addButton">
+      <input
+        type="number"
+        name="amount"
+        id="amount"
+        min="1"
+        class="form-control"
+        [(ngModel)]="amount"
+      />
+      <button class="btn btn-danger" (click)="add()">Add</button>
+    </div>
     <span>{{ item.price }} NIS</span>
   </div>
 </div>
