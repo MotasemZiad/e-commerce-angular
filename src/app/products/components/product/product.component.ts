@@ -7,13 +7,19 @@ import { Product } from 'src/app/models/product';
   styleUrls: ['./product.component.scss'],
 })
 export class ProductComponent implements OnInit {
-  @Input() item: Product | any = {};
+  @Input() item: any = {};
   @Output('addedItem') addedItem = new EventEmitter();
+  addButton: boolean = false;
+  amount: number = 0;
   constructor() {}
 
   ngOnInit(): void {}
 
   add() {
-    this.addedItem.emit(this.item);
+    this.addedItem.emit({ item: this.item, quantity: this.amount });
+  }
+
+  toggleButton() {
+    this.addButton = !this.addButton;
   }
 }
