@@ -1,0 +1,12 @@
+<label for="{{ title }}" class="my-1">{{ title | titlecase }}: </label>
+<select
+  id="{{ title }}"
+  name="{{ title }}"
+  class="form-select"
+  (change)="detectChanges($event)"
+>
+  <option value="all" selected>All</option>
+  <option value="{{ option }}" *ngFor="let option of options">
+    {{ option | titlecase }}
+  </option>
+</select>

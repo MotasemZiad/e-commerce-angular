@@ -1,0 +1,15 @@
+<div class="item">
+  <img
+    src="{{ item.image }}"
+    loading="lazy"
+    alt="An image of a {{ item.title }}"
+  />
+  <div class="body">
+    <h4>{{ item.title }}</h4>
+    <p>{{ item.description }}</p>
+  </div>
+  <div class="px-3 mb-2 d-flex justify-content-between align-items-center">
+    <button class="btn btn-success">Add to cart</button>
+    <span>{{ item.price }} NIS</span>
+  </div>
+</div>
