@@ -10,6 +10,7 @@ import { Product } from 'src/app/models/product';
 export class AllProductsComponent implements OnInit {
   categories: string[] = [];
   products: Product[] = [];
+  cartProducts: any[] = [];
   loading: boolean = false;
 
   constructor(private service: ProductsService) {}
@@ -17,6 +18,22 @@ export class AllProductsComponent implements OnInit {
   ngOnInit(): void {
     this.getCategories();
     this.getProducts();
+  }
+
+  addToCart(event: any) {
+    if ('cart' in localStorage) {
+      this.cartProducts = JSON.parse(localStorage.getItem('cart')!);
+      let exist = this.cartProducts.find((element) => element.id === event.id);
+      if (exist) {
+        alert('Product is already added to cart!');
+      } else {
+        this.cartProducts.push(event);
+        localStorage.setItem('cart', JSON.stringify(this.cartProducts));
+      }
+    } else {
+      this.cartProducts.push(event);
+      localStorage.setItem('cart', JSON.stringify(this.cartProducts));
+    }
   }
 
   filterCategory(event: any) {

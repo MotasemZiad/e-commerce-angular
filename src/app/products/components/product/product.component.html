@@ -9,7 +9,7 @@
     <p>{{ item.description }}</p>
   </div>
   <div class="px-3 mb-2 d-flex justify-content-between align-items-center">
-    <button class="btn btn-success">Add to cart</button>
+    <button class="btn btn-success" (click)="add()">Add to cart</button>
     <span>{{ item.price }} NIS</span>
   </div>
 </div>
