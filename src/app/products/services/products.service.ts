@@ -21,4 +21,8 @@ export class ProductsService {
       `${environment.baseApi}/products/category/${category}`
     );
   }
+
+  getProductById(id: number) {
+    return this.http.get(`${environment.baseApi}/products/${id}`);
+  }
 }
