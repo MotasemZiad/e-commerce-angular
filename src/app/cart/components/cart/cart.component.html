@@ -1,1 +1,80 @@
-<p>cart works!</p>
+<div class="cart-box">
+  <h1 class="text-danger">Shopping Cart</h1>
+  <div class="cart-head">
+    <p class="lead">
+      You have
+      <label class="text-danger">{{ cartProducts!.length }}</label> items in
+      your cart
+    </p>
+    <span class="text-danger card-header" (click)="clearShoppingCart()">
+      Clear shopping cart</span
+    >
+  </div>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th></th>
+        <th>Name</th>
+        <th>Price</th>
+        <th style="width: 25%">Quantity</th>
+        <th>Total</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let cartItem of cartProducts; index as i">
+        <td>
+          <img
+            [src]="cartItem.item.image"
+            alt="Image of the {{ cartItem.item.title }} item."
+          />
+        </td>
+        <td>{{ cartItem.item.title }}</td>
+        <td>{{ cartItem.item.price | number : "1.2-2" }} NIS</td>
+        <td>
+          <div class="quantity">
+            <button class="btn btn-dark" (click)="plusAmount(i)">+</button>
+            <input
+              class="form-control"
+              type="number"
+              min="1"
+              [(ngModel)]="cartItem.quantity"
+              (change)="detectChanges()"
+            />
+            <button class="btn btn-dark" (click)="minusAmount(i)">-</button>
+          </div>
+        </td>
+        <td>
+          {{ cartItem.item.price * cartItem.quantity | number : "1.2-2" }} NIS
+        </td>
+        <td>
+          <button class="btn btn-danger" (click)="deleteProduct(i)">
+            Delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th>Total: {{ total | number : "1.2-2" }} NIS</th>
+        <th>
+          <button
+            class="btn btn-success"
+            (click)="addToCart()"
+            [disabled]="isEmpty()"
+          >
+            Order now
+          </button>
+        </th>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+
+<div class="alert alert-success" role="alert" *ngIf="success">
+  <strong>Well done!</strong> Your order is send successfully
+</div>

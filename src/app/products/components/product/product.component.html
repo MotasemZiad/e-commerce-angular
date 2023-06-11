@@ -1,12 +1,14 @@
 <div class="item">
-  <img
-    src="{{ item.image }}"
-    loading="lazy"
-    alt="An image of a {{ item.title }}"
-  />
-  <div class="body">
-    <h4>{{ item.title }}</h4>
-    <p>{{ item.description }}</p>
+  <div routerLink="/products/{{ item.id }}">
+    <img
+      src="{{ item.image }}"
+      loading="lazy"
+      alt="An image of a {{ item.title }}"
+    />
+    <div class="body">
+      <h4>{{ item.title }}</h4>
+      <p>{{ item.description }}</p>
+    </div>
   </div>
   <div class="px-3 mb-2 d-flex justify-content-between align-items-center">
     <button class="btn btn-success" *ngIf="!addButton" (click)="toggleButton()">
@@ -21,7 +23,9 @@
         class="form-control"
         [(ngModel)]="amount"
       />
-      <button class="btn btn-danger" (click)="add()">Add</button>
+      <button class="btn btn-danger" (click)="add(); toggleButton()">
+        Add
+      </button>
     </div>
     <span>{{ item.price }} NIS</span>
   </div>
