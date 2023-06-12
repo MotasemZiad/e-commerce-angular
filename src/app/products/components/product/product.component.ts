@@ -10,7 +10,7 @@ export class ProductComponent implements OnInit {
   @Input() item: any = {};
   @Output('addedItem') addedItem = new EventEmitter();
   addButton: boolean = false;
-  amount: number = 0;
+  amount: number = 1;
   constructor() {}
 
   ngOnInit(): void {}

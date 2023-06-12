@@ -1,5 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Category } from 'src/app/models/category';
+import { Product } from 'src/app/models/product';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -8,21 +11,23 @@ import { environment } from 'src/environments/environment';
 export class ProductsService {
   constructor(private http: HttpClient) {}
 
-  getAllProducts() {
-    return this.http.get(`${environment.baseApi}/products`);
+  getAllProducts(): Observable<Product[]> {
+    return this.http.get<Product[]>(`${environment.baseApi}/products`);
   }
 
-  getAllCategories() {
-    return this.http.get(`${environment.baseApi}/products/categories`);
+  getAllCategories(): Observable<Category> {
+    return this.http.get<Category>(
+      `${environment.baseApi}/products/categories`
+    );
   }
 
-  getProductsByCategory(category: string) {
-    return this.http.get(
+  getProductsByCategory(category: string): Observable<Product[]> {
+    return this.http.get<Product[]>(
       `${environment.baseApi}/products/category/${category}`
     );
   }
 
-  getProductById(id: number) {
-    return this.http.get(`${environment.baseApi}/products/${id}`);
+  getProductById(id: number): Observable<Product> {
+    return this.http.get<Product>(`${environment.baseApi}/products/${id}`);
   }
 }

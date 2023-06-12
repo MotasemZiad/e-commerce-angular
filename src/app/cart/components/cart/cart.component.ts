@@ -1,7 +1,8 @@
 import { CartItem } from './../../../models/cart';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Order } from '../../../models/order';
 import { CartService } from '../../services/cart.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-cart',
@@ -41,7 +42,11 @@ export class CartComponent implements OnInit {
   }
 
   minusAmount(i: number) {
-    this.cartProducts![i].quantity--;
+    if (this.cartProducts![i].quantity <= 1) {
+      return;
+    } else {
+      this.cartProducts![i].quantity--;
+    }
     this.getCartTotal();
     localStorage.setItem('cart', JSON.stringify(this.cartProducts));
   }
@@ -95,7 +100,6 @@ export class CartComponent implements OnInit {
         console.log(error);
       }
     );
-
     console.log(order);
   }
 }
