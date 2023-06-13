@@ -10,6 +10,9 @@ import { environment } from 'src/environments/environment';
 export class CartService {
   constructor(private http: HttpClient) {}
 
+  getAllCarts(): Observable<Order[]> {
+    return this.http.get<Order[]>(`${environment.baseApi}/carts`);
+  }
   placeOrder(order: Order): Observable<any> {
     return this.http.post(`${environment.baseApi}/carts`, order);
   }

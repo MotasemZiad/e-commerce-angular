@@ -2,7 +2,6 @@ import { CartItem } from './../../../models/cart';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Order } from '../../../models/order';
 import { CartService } from '../../services/cart.service';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-cart',
@@ -11,6 +10,7 @@ import { Subscription } from 'rxjs';
 })
 export class CartComponent implements OnInit {
   cartProducts?: CartItem[] = [];
+  carts: Order[] = [];
   total: number = 0;
   success: boolean = false;
   constructor(private cartService: CartService) {}
@@ -18,6 +18,14 @@ export class CartComponent implements OnInit {
   ngOnInit(): void {
     this.getCartProducts();
     this.getCartTotal();
+    this.getAllCarts();
+  }
+
+  getAllCarts() {
+    this.cartService.getAllCarts().subscribe((res) => {
+      this.carts = res;
+      console.log(this.carts);
+    });
   }
 
   getCartProducts() {
