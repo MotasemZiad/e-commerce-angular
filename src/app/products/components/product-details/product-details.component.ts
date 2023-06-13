@@ -25,7 +25,7 @@ export class ProductDetailsComponent implements OnInit {
     this.loading = true;
 
     this.service.getProductById(this.id).subscribe(
-      (res: any) => {
+      (res) => {
         console.log(res);
         this.product = res;
         this.loading = false;

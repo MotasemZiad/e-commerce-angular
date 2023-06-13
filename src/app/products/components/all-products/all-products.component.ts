@@ -65,7 +65,7 @@ export class AllProductsComponent implements OnInit {
     this.loading = true;
 
     this.service.getAllProducts().subscribe(
-      (res: any) => {
+      (res) => {
         this.products = res;
         this.loading = false;
       },
@@ -80,7 +80,7 @@ export class AllProductsComponent implements OnInit {
   getCategories() {
     this.loading = true;
     this.service.getAllCategories().subscribe(
-      (res: any) => {
+      (res) => {
         this.categories = res;
         this.loading = false;
       },

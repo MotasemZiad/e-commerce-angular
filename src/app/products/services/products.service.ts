@@ -15,8 +15,8 @@ export class ProductsService {
     return this.http.get<Product[]>(`${environment.baseApi}/products`);
   }
 
-  getAllCategories(): Observable<Category> {
-    return this.http.get<Category>(
+  getAllCategories(): Observable<string[]> {
+    return this.http.get<string[]>(
       `${environment.baseApi}/products/categories`
     );
   }
