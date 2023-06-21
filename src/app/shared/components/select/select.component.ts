@@ -7,7 +7,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 })
 export class SelectComponent implements OnInit {
   @Input() title: string = '';
-  @Input() options: any[] = [];
+  @Input() options: string[] = [];
   @Output('selectedValue') selectedValue = new EventEmitter();
   constructor() {}
 
